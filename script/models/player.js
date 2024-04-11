@@ -4,6 +4,7 @@ import conf from '../config.js';
 import Sprite from './sprite.js';
 import Fireball from './fireball.js';
 import Hitbox from './hitbox.js';
+import HealthBar from './hbar.js';
 
 class Player extends Hitbox {
     name;
@@ -36,6 +37,7 @@ class Player extends Hitbox {
         this.update_timer = new Clock(125);
         this.canJump = true;
         this.bullets = [];
+        this.hbar = new HealthBar(this.position.x, this.position.y, 165, 20, 100, 100);
     }
 
     jump() {
@@ -66,6 +68,7 @@ class Player extends Hitbox {
         ctx.fillStyle = "white";
         ctx.fillText(this.name, this.position.x + 50, (ctx.canvas.clientHeight - (this.position.y + 5)));
         this.bullets.forEach((b) => b.draw(ctx));
+        this.hbar.draw(ctx);
 
         super.draw(ctx);
         
@@ -75,6 +78,8 @@ class Player extends Hitbox {
         this.position.add(this.velocity);
         this.moving = this.velocity.x != 0;
         this.update_timer.update();
+        this.hbar.position.x = this.position.x;
+        this.hbar.position.y = this.position.y;
 
         //  accelerazione gravitazionale se lascio la terra
         // if(this.position.y > conf.GROUND_Y) {

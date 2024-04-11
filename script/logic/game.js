@@ -2,6 +2,7 @@ import Player from "../models/player.js";
 import Sound from "../models/sound.js";
 import Sprite from "../models/sprite.js";
 import Hitbox from "../models/hitbox.js";
+import HealthBar from "../models/hbar.js";
 
 class Game {
     playerNickname;
